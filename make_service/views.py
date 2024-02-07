@@ -284,6 +284,11 @@ def delete_service(request, stid2):
 
 def mybooking(request):
     user_id = request.user.id
-    booked_data =service_booking.objects.filter(user_id=user_id)
+    booked_data =service_booking.objects.filter(user_id=user_id,deletee=False)
     return render(request,"service_booked.html",{'booked_data':booked_data})
     
+def delete_my_ser_booked(request, stid2):
+    station_to_hide = get_object_or_404(service_booking, id=stid2)
+    station_to_hide.deletee = True
+    station_to_hide.save()
+    return redirect('http://127.0.0.1:8000/make_service/mybooking/')

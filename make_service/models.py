@@ -45,3 +45,4 @@ class service_booking(models.Model):
     status = models.BooleanField(default=False)
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='service_book', null=True)
     car_services = models.ManyToManyField(CarService, related_name='service_bookings')
+    deletee = models.BooleanField(default=False)
