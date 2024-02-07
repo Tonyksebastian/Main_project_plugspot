@@ -1,7 +1,5 @@
-from django.shortcuts import render, redirect
 from django.contrib import auth
-from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login, authenticate, logout
+from django.contrib.auth import login as auth_login, authenticate
 from django.shortcuts import render, redirect
 from .models import CustomUser, UserProfile
 from django.contrib.auth import get_user_model
@@ -11,7 +9,6 @@ from .models import OTPModel
 from django.utils import timezone
 
 User = get_user_model()
-
 
 def index(request):
     return render(request, "index.html")
@@ -98,6 +95,47 @@ def register(request):
                 return redirect('verify_otp', user_id=user.id)
 
     return render(request, 'register.html', {'error_message': error_message, 'role': CustomUser.STOWNER})
+
+def registerWK(request):
+    error_message = ''
+    if request.method == 'POST':
+        first_name = request.POST.get('fname')
+        last_name = request.POST.get('sname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        role = User.WORKER
+
+        if first_name and last_name and email and phone and role and password:
+            if User.objects.filter(email=email,phone=phone).exists():
+                error_message = "Email is already registered."
+            else:
+                # Create the user but don't activate it yet
+                user = User(
+                    first_name=first_name,
+                    last_name=last_name,
+                    phone=phone,
+                    email=email,
+                    role=role
+                )
+                user.set_password(password)
+                user.is_active = False
+                user.save()
+                
+                # Generate and send OTP
+                otp = TOTP('JBSWY3DPEHPK3PXP').now()
+                otp_record = OTPModel.objects.create(
+                    user=user,
+                    otp=otp,
+                    expires_at=timezone.now() + timezone.timedelta(minutes=10)
+                )
+                send_otp_email(user.email, otp)
+                
+                # Redirect to OTP verification page with user_id
+                return redirect('verify_otp', user_id=user.id)
+
+    return render(request, 'register_worker.html', {'error_message': error_message, 'role': CustomUser.WORKER})
+
 
 def verify_otp(request, user_id=None):
     user = User.objects.get(id=user_id)
