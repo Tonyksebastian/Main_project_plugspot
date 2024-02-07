@@ -39,6 +39,7 @@ class service_booking(models.Model):
     company = models.CharField(default='', max_length=250)
     model = models.CharField(default='', max_length=250)
     km_done = models.FloatField()
+    vehno = models.CharField(default='', max_length=250)
     date = models.DateTimeField()
     type = models.CharField(default='', max_length=25)
     status = models.BooleanField(default=False)

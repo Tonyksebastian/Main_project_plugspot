@@ -154,6 +154,7 @@ def bookservice(request):
         phone = request.POST.get('phone')
         company = request.POST.get('company')
         model = request.POST.get('model')
+        vehno = request.POST.get('vehno')
         km = request.POST.get('km')
         date = request.POST.get('date')
         type = request.POST.get('type')
@@ -170,6 +171,7 @@ def bookservice(request):
             km_done=km,
             date=date,
             type=type,
+            vehno=vehno,
             user_id=request.user
         )
 
