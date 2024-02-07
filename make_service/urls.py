@@ -23,6 +23,7 @@ urlpatterns = [
     path('delete_service/<int:stid2>', views.delete_service, name='delete_service'),
     path('mybooking/', views.mybooking, name='mybooking'),   
     path('delete_my_ser_booked/<int:stid2>', views.delete_my_ser_booked, name='delete_my_ser_booked'),   
+    path('ser_station_booked/', views.ser_station_booked, name='ser_station_booked'),   
 
 
 

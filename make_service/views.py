@@ -292,3 +292,12 @@ def delete_my_ser_booked(request, stid2):
     station_to_hide.deletee = True
     station_to_hide.save()
     return redirect('http://127.0.0.1:8000/make_service/mybooking/')
+
+
+
+def ser_station_booked(request):
+    user = request.user
+    data = CustomUser.objects.filter(id=user.id)
+    total_booking = service_booking.objects.filter(status=True).count()
+    bookings = service_booking.objects.all()
+    return render(request, "station_own_dashboard.html", {'bookings': bookings, 'data': data, 'total_booking': total_booking})

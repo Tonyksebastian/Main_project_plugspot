@@ -159,8 +159,8 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-end px-5">
-    <a href="{% url 'index' %}" class="btn m-1">Home</a>
-    <a href="#" class="btn m-1">Booking Data</a>
+    <a href="{% url 'index' %}" class="btn m-1">Home</a>    
+    <a href="{% url 'ser_station_booked' %}" class="btn m-1">Service Booked Data</a>
     <a href="{% url 'addservicestation' %}" class="btn m-1">Add Servive Stations</a>
     <a href="{% url 'closed_service_station' %}" class="btn m-1">Closed Service Stations</a>
     <a href="{% url 'profile' %}" class="btn-pro m-1">{{ user.first_name }}</a>
