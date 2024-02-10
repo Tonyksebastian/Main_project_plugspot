@@ -301,3 +301,27 @@ def ser_station_booked(request):
     total_booking = service_booking.objects.filter(status=True).count()
     bookings = service_booking.objects.all()
     return render(request, "station_own_dashboard.html", {'bookings': bookings, 'data': data, 'total_booking': total_booking})
+
+def update_service(request, stid3):
+    # Retrieve the existing service object or return 404 if not found
+    service = get_object_or_404(add_service, id=stid3)
+    
+    if request.method == 'POST':
+        # Extract updated data from the form
+        photo = request.FILES.get('ser_img')
+        ser_name = request.POST.get('ser_name')
+        desc = request.POST.get('ser_desc')
+        price = request.POST.get('ser_price')
+
+        # Update the service object with the new data
+        service.photo = photo
+        service.ser_name = ser_name
+        service.description = desc
+        service.price = price
+        service.save()
+
+        # Redirect the user to a relevant page after the update
+        return redirect('select_station')
+    
+    # Pass the service object to the template for rendering the form
+    return render(request, "update_service.html", {'service': service})

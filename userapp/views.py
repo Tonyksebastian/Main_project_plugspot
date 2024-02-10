@@ -7,6 +7,8 @@ from pyotp import TOTP
 from django.core.mail import send_mail
 from .models import OTPModel
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 
 User = get_user_model()
 
@@ -146,7 +148,7 @@ def verify_otp(request, user_id=None):
 
     if request.method == 'POST':
         entered_otp = request.POST.get('otp')
-
+        
         if entered_otp == otp_record.otp:
             otp_record.delete()  # Delete OTP record after successful verification
             user.is_active = True

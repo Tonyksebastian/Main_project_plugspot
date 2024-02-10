@@ -3,7 +3,6 @@ from django.urls import path
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from .views import *
-
 urlpatterns = [
     
     path('', views.index,name='index'),

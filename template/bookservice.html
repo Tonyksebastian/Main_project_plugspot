@@ -132,15 +132,16 @@
           <img src="{{ i.photo.url }}" width="150px" height="150px" alt="" srcset="">
           <p class="fw-bold fst-italic">{{i.ser_name}}</p>
           <p>{{i.description}}</p>
-          <p>{{i.price}}</p>
-          <a href="{% url 'bookservice' %}">
-            <button class="btn btn-sm btn-md">Book Now</button></a>    
-            
+          <p>From {{i.price}} Rs/-</p>
+          <a href="{% url 'bookservice' %}" class="btn btn-sm btn-md bg-info">Book Now</a>    
+
           {% if user.role == 'stowner' %}
-          <button class="book-now-btn btn-sm bg-danger text-white" onclick="deleConfirmation('{{ i.id }}')" style="border-radius: 5px; padding: 8px 16px; border: none; cursor: pointer;">
-            <i class="bi bi-trash"></i> Delete
-        </button>
-        {% endif %}
+          <a href="{% url 'update_service' i.id %}" class="btn btn-sm bg-primary">Update</a>
+          <button class="btn btn-lg bg-danger text-white" onclick="deleConfirmation('{{ i.id }}')">
+              <i class="bi bi-trash"></i> Delete
+          </button>
+          {% endif %}
+          
         </div>
       </div>
       {% endfor %}

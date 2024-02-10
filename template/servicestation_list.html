@@ -199,7 +199,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-end px-5">
     <a href="{% url 'index' %}" class="btn m-1">Home</a>
-    <a href="{% url "mybooking" %}" class="btn m-1">Booking Data</a>
+    <a href="{% url 'mybooking' %}" class="btn m-1">Booking Data</a>
     <a href="{% url 'booking' %}" class="btn m-1">Available Charging Stations</a>
     <a href="{% url 'profile' %}" class="btn-pro m-1">{{ user.first_name }}</a>
   </nav>
@@ -213,20 +213,22 @@
   </div>
 
   <div class="container">
-    <input type="text" id="searchInput" placeholder="Search for stations..." />
+    <input type="text" id="searchInput" placeholder="Search for stations..." style="border-radius: 25px; border: none;" />
     <input type="button" value="Search" onclick="searchStations()" />
     {% for i in data %}
-    <div class="service-station bg-white rounded-2 m-2">
+    <div class="service-station bg-white m-2" style="border-radius: 10px;">
       <div class="station-details">
         <img src="{{i.photo.url}}" alt="Station 1" />
         <p class="pt-3">{{i.stname}}</p>
         <p class="contact-info">Location: {{i.place}}</p>
       </div>
-      <div></div>
+      <div>
+        
+      </div>
       <div>
         <p class="contact-info">Contact: {{i.contact}}</p>
         <p class="contact-info">Working Hours: 7 AM - 6 PM</p>
-        <a href="{% url 'services' i.id %}"><button class="book-now-btn">Book Now</button></a>
+        <a href="{% url 'services' i.id %}"><button class="book-now-btn bg-dark">View Station</button></a>
       </div>
     </div>
   {% endfor %}

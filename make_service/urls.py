@@ -24,6 +24,7 @@ urlpatterns = [
     path('mybooking/', views.mybooking, name='mybooking'),   
     path('delete_my_ser_booked/<int:stid2>', views.delete_my_ser_booked, name='delete_my_ser_booked'),   
     path('ser_station_booked/', views.ser_station_booked, name='ser_station_booked'),   
+    path('update_service/<int:stid3>/', views.update_service, name='update_service'),
 
 
 

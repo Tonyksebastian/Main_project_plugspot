@@ -318,7 +318,6 @@ def send_welcome_email(username, amount, email, booking):
     
     send_mail(subject, message, from_email, recipient_list)
 
-
 @login_required
 def addstation(request):
     user = request.user

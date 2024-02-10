@@ -159,7 +159,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-end px-5">
-    <a href="{% url 'index' %}" class="btn m-1">Home</a>    
+    <a href="{% url 'index' %}" class="btn m-1">Home</a>
     <a href="{% url 'ser_station_booked' %}" class="btn m-1">Service Booked Data</a>
     <a href="{% url 'addservicestation' %}" class="btn m-1">Add Servive Stations</a>
     <a href="{% url 'closed_service_station' %}" class="btn m-1">Closed Service Stations</a>
@@ -238,22 +238,22 @@
     });
   }
 
-    function searchStations() {
-      var input, filter, stations, station, txtValue;
-      input = document.getElementById("searchInput");
-      filter = input.value.toUpperCase();
-      stations = document.getElementsByClassName("service-station");
+  function searchStations() {
+    var input, filter, stations, station, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    stations = document.getElementsByClassName("service-station");
 
-      for (var i = 0; i < stations.length; i++) {
-        station = stations[i].getElementsByClassName("station-details")[0];
-        txtValue = station.textContent || station.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          stations[i].style.display = "";
-        } else {
-          stations[i].style.display = "none";
-        }
+    for (var i = 0; i < stations.length; i++) {
+      station = stations[i].getElementsByClassName("station-details")[0];
+      txtValue = station.textContent || station.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        stations[i].style.display = "";
+      } else {
+        stations[i].style.display = "none";
       }
     }
+  }
 
 </script>
 
